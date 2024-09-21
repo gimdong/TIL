@@ -11,5 +11,7 @@ using namespace std;
 namespace Ch01 {
     int Ex01(void);
     int Ex02(void);
+
+    int Ex03(void);
 }
 
