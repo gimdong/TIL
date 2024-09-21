@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        //clang++ : compiler 
+        //lldb : Low Level Debuger ...
+        {
+            "name": "clang++,lldb:build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/.vscode/Build/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true, // 외부 터미널에서 결과를 확인한다.
+            "MIMode": "lldb", 
+            "preLaunchTask": "C/C++: clang++ 활성 파일 빌드"
+        }
+
+
+    ]
+}
