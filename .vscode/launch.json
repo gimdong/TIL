@@ -15,7 +15,7 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": true, // 외부 터미널에서 결과를 확인한다.
+            "externalConsole": false, //true, // 외부 터미널에서 결과를 확인한다.
             "MIMode": "lldb", 
             "preLaunchTask": "C/C++: clang++ 활성 파일 빌드"
         }
