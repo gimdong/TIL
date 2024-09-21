@@ -1,14 +1,10 @@
-#include <iostream>
-
 #include "./Example_function.h"
-
-
-using namespace std;
 
 int main(int argc, char* argv[])
 {
     cout << "Hello world" << endl;
 
+    Ch01::Ex01();
 
     return 0;
 }
