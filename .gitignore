@@ -2,3 +2,11 @@
 .vscode/Build/Main.dSYM/Contents/Info.plist
 .vscode/Build/Main.dSYM/Contents/Resources/DWARF/Main
 .vscode/Build/Main.dSYM/Contents/Resources/Relocations/aarch64/Main.yml
+.vscode/Build/Example_Ch01
+.vscode/Build/Example_function
+.vscode/Build/Example_Ch01.dSYM/Contents/Info.plist
+.vscode/Build/Example_Ch01.dSYM/Contents/Resources/DWARF/Example_Ch01
+.vscode/Build/Example_Ch01.dSYM/Contents/Resources/Relocations/aarch64/Example_Ch01.yml
+.vscode/Build/Example_function.dSYM/Contents/Info.plist
+.vscode/Build/Example_function.dSYM/Contents/Resources/DWARF/Example_function
+.vscode/Build/Example_function.dSYM/Contents/Resources/Relocations/aarch64/Example_function.yml
