@@ -23,12 +23,20 @@ namespace Ch01 {
         const Point operator*(Point& arg);
         const Point operator/(Point& arg);
         const Point operator%(Point& arg);
+
+        const Point& operator++(); // Prefix(전위)
+        const Point operator++(int);  // Postfix(후위)
+        const Point& operator--();
+        const Point operator--(int);
+        const bool operator!(); // Prefix(전위) x,y 둘 다 true(0이 아닌 경우) 인 경우에만 true 반
+
     };
     //Section 01 .. TIL #4
     int Ex01(void);
     int Ex02(void);
     //Section 02 .. TIL #5
-    int Ex03_04_05_06(void);
-    int Ex_const_member_function(void);
+    int Section02(void);
+    //Section 03 .. TIL #6
+    int Section03(void);
 }
 
