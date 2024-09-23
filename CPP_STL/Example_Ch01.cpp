@@ -15,7 +15,7 @@ int Ch01::Ex02(void)
     return 0;
 }
 
-
+//이항연산자
 const Point Point::operator+(Point& arg)
 {
     Point pt; 
@@ -57,7 +57,7 @@ const Point Point::operator%(Point& arg)
     return pt;
 }
 
-int Ch01::Ex03_04_05_06(void)
+int Ch01::Section02(void)
 {
     Point p1(2,3);
     Point p2(4,5);
@@ -74,8 +74,59 @@ int Ch01::Ex03_04_05_06(void)
     p3 = p1 % p2;
     p3.print();
 
+    return 0;
+}
+
+//단항연산자
+const Point& Point::operator++()
+{
+    ++x;
+    ++y;
+    return *this;
+}
+const Point Point::operator++(int)
+{
+    Point pt(x,y);
+    ++x;
+    ++y;
+    return pt;
+}
+const Point& Point::operator--()
+{
+    --x;--y;
+    return *this;
+}
+const Point Point::operator--(int)
+{
+    Point temp = *this;
+    --x;--y;
+    return temp;
+}
+const bool Point::operator!()
+{
+    if((x == 0) && (y == 0)) return true;
+    return false;
+}
+int Ch01::Section03(void)
+{
+    Point p1(2,3), p2(2,3), p3(0,0);
+    Point result;
+
+    cout << "p1 : "; p1.print();
+    result = ++p1;
+    cout << "result : "; result.print();
+    cout << "++p1 :"; p1.print();
+    
+    cout << "p2 : "; p2.print();
+    result = p2++; // p2.operator++(0) 과 동일
+    cout << "result : "; result.print();
+    cout << "p2++ :"; p2.print();
 
 
+    p3.print();
+    if(!p3) cout << "return true" << endl;
+    else cout << "return false" << endl;
 
+    
     return 0;
 }
