@@ -11,3 +11,4 @@
 .vscode/Build/Example_function.dSYM/Contents/Resources/DWARF/Example_function
 .vscode/Build/Example_function.dSYM/Contents/Resources/Relocations/aarch64/Example_function.yml
 .DS_Store
+CPP_STL/.vscode/Build/*
