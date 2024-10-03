@@ -107,6 +107,11 @@ const bool Point::operator!()
     if((x == 0) && (y == 0)) return true;
     return false;
 }
+const Point& Point::operator*()
+{
+    return *this;
+}
+
 int Ch01::Section03(void)
 {
     Point p1(2,3), p2(2,3), p3(0,0);
@@ -127,6 +132,8 @@ int Ch01::Section03(void)
     if(!p3) cout << "return true" << endl;
     else cout << "return false" << endl;
 
-    
+    p3.print();
+    (*p3).print();
+
     return 0;
 }
