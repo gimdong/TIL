@@ -29,6 +29,8 @@ namespace Ch01 {
         const Point& operator--();
         const Point operator--(int);
         const bool operator!(); // Prefix(전위) x,y 둘 다 true(0이 아닌 경우) 인 경우에만 true 반
+        const Point& operator*(); // 간접연산자... 변수 명 앞에서는 변수에 저장된 주소값을 리턴
+        //const Point& operator&(Point& arg); // 주소연산자... 변수 명
 
     };
     //Section 01 .. TIL #4
