@@ -111,6 +111,10 @@ const Point& Point::operator*()
 {
     return *this;
 }
+const Point* Point::operator->()
+{
+    return this;
+}
 
 int Ch01::Section03(void)
 {
@@ -134,6 +138,14 @@ int Ch01::Section03(void)
 
     p3.print();
     (*p3).print();
+
+    Point* pp;
+    pp = &p3;
+
+    pp->print();
+
+    //(&p3).print();
+    (&p3)->print();
 
     return 0;
 }
