@@ -12,3 +12,8 @@
 .vscode/Build/Example_function.dSYM/Contents/Resources/Relocations/aarch64/Example_function.yml
 .DS_Store
 CPP_STL/.vscode/Build/*
+.vscode/Build/graph_adjacency matrix
+.vscode/Build/graph_adjacency matrix.dSYM/Contents/Info.plist
+.vscode/Build/graph_adjacency matrix.dSYM/Contents/Resources/DWARF/graph_adjacency matrix
+.vscode/Build/graph_adjacency matrix.dSYM/Contents/Resources/Relocations/aarch64/graph_adjacency matrix.yml
+Algorithm/Main
