@@ -14,12 +14,34 @@
 #define ADD_EDGE        (200)
 #define DELETE_EDGE     (300)
 #define PRINT_EDGE      (400)
-#define PRINT_GRAPH     (500)
+#define PRINT_MATRIX    (500)
 #define TERMINATE       (999)
 
 #define MAX_N           (1000)
 
+#define f(i,s,e)        for(int i = s; i < e; ++i)
+
 int gaanMatrix[MAX_N][MAX_N] = { 0,};
+int gN; // Node 갯수.
+int gE; // Edge 갯수.
+
+int init_graph(void)
+{
+    int nN = MAX_N + 1;
+    do{
+        printf("-1. input Max node count : ");
+        scanf("%d",&nN);
+    } while(nN > MAX_N);
+
+   f(i, 0, nN){
+    f(j,0,nN)
+        gaanMatrix[i][j] = 0;
+   }
+   gN = nN;
+   gE = 0;
+
+   return 0;
+}
 
 /**
  * @fn add_edge
@@ -37,6 +59,28 @@ int add_edge(void)
     return 0;    
 }
 
+int delete_edge(void)
+{
+    return 0;  
+}
+
+int print_edge(void)
+{
+    return 0;
+}
+
+int print_matrix(void)
+{
+
+    f(i,0,gN){
+        f(j,0,gN){
+            printf("%d ",gaanMatrix[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+    return 0;
+}
 int graph_adjacency_matrix(void)
 {
     int nCMD = 0;
@@ -48,10 +92,26 @@ int graph_adjacency_matrix(void)
 
         switch (nCMD)
         {
+        case INIT_GRAPGH:
+            init_graph();
+            break;
+        
         case ADD_EDGE:
             add_edge();
             break;
         
+        case DELETE_EDGE:
+            delete_edge();
+            break;
+        
+        case PRINT_EDGE:
+            print_edge();
+            break;
+        
+        case PRINT_MATRIX:
+            print_matrix();
+            break;
+
         default:
             printf("It was wrong CMD[%d]", nCMD);
             break;

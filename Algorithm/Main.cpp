@@ -17,11 +17,15 @@ int main(void)
     {
         cout <<"["<< nIter_ix++ <<"] " << it->first << endl;
     }
-
+select_item :
     cout << "select item : ";
     cin >> nIter_ix;
 
-    gVc_list[nIter_ix].second();
+    if(nIter_ix >= gVc_list.size())
+        goto select_item;
+
+    else
+        gVc_list[nIter_ix].second();
 
     return 0;
 }
