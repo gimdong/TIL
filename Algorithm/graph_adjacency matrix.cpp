@@ -12,13 +12,11 @@
 
 #define INIT_GRAPGH     (100)
 #define ADD_EDGE        (200)
-#define DELETE_EDGE     (300)
-#define PRINT_EDGE      (400)
 #define PRINT_MATRIX    (500)
 #define TERMINATE       (999)
 
 #define MAX_N           (1000)
-
+#define MAX_WEIGHT      (10)
 #define f(i,s,e)        for(int i = s; i < e; ++i)
 
 int gaanMatrix[MAX_N][MAX_N] = { 0,};
@@ -53,22 +51,18 @@ int init_graph(void)
 int add_edge(void)
 {
     int nDeparture, nDestination, nWeight;
-    printf("-1. input (Depature, Destination, Weight)");
-    scanf("%d %d %d",&nDeparture, &nDestination, &nWeight);
+    
+    do
+    {
+        printf("-1. input (Depature, Destination, Weight)");
+        scanf("%d %d %d",&nDeparture, &nDestination, &nWeight);
+    }while((nDeparture <= 0)||(nDestination <= 0)||(nWeight <= 0)||(nWeight >= MAX_WEIGHT));
+
+    gaanMatrix[nDeparture][nDeparture] = nWeight;
+
     printf("add edge (%d,%d) = %d \n",nDeparture, nDestination, nWeight);
     return 0;    
 }
-
-int delete_edge(void)
-{
-    return 0;  
-}
-
-int print_edge(void)
-{
-    return 0;
-}
-
 int print_matrix(void)
 {
 
@@ -98,14 +92,6 @@ int graph_adjacency_matrix(void)
         
         case ADD_EDGE:
             add_edge();
-            break;
-        
-        case DELETE_EDGE:
-            delete_edge();
-            break;
-        
-        case PRINT_EDGE:
-            print_edge();
             break;
         
         case PRINT_MATRIX:
