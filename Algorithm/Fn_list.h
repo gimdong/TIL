@@ -3,6 +3,7 @@
 
 
 #include <stdio.h>
+#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -12,6 +13,7 @@ typedef vector<pair<string,FN>> VEC_FN;
 
 
 int graph_adjacency_matrix(void);
+int graph_adjacency_list(void);
 
 
 #endif

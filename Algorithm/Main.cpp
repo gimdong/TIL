@@ -10,6 +10,7 @@ int main(void)
 {
     
     REG_ITEM("graph adjacency matrix", graph_adjacency_matrix);
+    REG_ITEM("graph adjacency list", graph_adjacency_list);
     
     
     int nIter_ix = 0;
