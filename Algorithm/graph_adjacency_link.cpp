@@ -14,7 +14,13 @@
 #define MAX_WEIGHT      (10)
 #define f(i,s,e)        for(int i = s; i < e; ++i)
 #define H_LINE          f(i, 0, 10) printf("-"); printf("\n");
-struct Node{
+
+//#define VER_1 // Linked List 로 양방향 그래프 구현
+#define VER_1_2 // Linked List 로 방향+가중치 그래프 구현
+//#define VER_2 // vector 로 방향+가중치 그래프 구현
+
+#ifdef VER_1
+typedef struct Node{
     /*정점의 id*/int m_nId;
     /*인접 Node*/Node* m_nNode;
 
@@ -34,8 +40,8 @@ struct Node{
 class AdjListGraph{
 private:
     /*정점의 개수*/int m_size;
-    /*정점의 이름*/char m_vertices[MAX_N];
-    /*인접 리스트*/Node* m_adjlist[MAX_N];
+    /*정점의 이름...배열의 인덱스는 (그래프에) 몇번째 등록된 정점인가를 의미*/char m_vertices[MAX_N];
+    /*인접 리스트...배열의 인덱스는 (그래프에) 몇번째 등록된 정점인가를 의미*/Node* m_adjlist[MAX_N];
 public:
     AdjListGraph(){
         m_size = 0;
@@ -116,3 +122,167 @@ int graph_adjacency_list(void)
 
     return 0;
 }
+
+#endif
+
+#ifdef VER_1_2
+
+struct Node{
+    char m_ID;
+    Node* m_next;
+    int m_weight;
+};
+
+class AdjList{
+private:
+    
+    int m_TotalNodeCnt = 0;
+    int m_TotalEdgeCnt = 0;
+    Node* m_HeadNode[MAX_N];
+
+public:
+    AdjList(){
+        m_TotalNodeCnt = 0;
+        m_TotalEdgeCnt = 0;
+    }
+    ~AdjList(){}
+
+    //insert Node
+    void mInsertNode(char _ID){
+        m_HeadNode[m_TotalNodeCnt] = new Node();
+        m_HeadNode[m_TotalNodeCnt]->m_ID = _ID;
+        m_HeadNode[m_TotalNodeCnt]->m_next = NULL;
+        m_HeadNode[m_TotalNodeCnt]->m_weight = 0;
+        m_TotalNodeCnt++;
+    }
+    //insert Edge
+    void mInsertEdge(char _pID, char _dID, int _weight){
+        f(i,0,m_TotalNodeCnt){
+            if(_pID == m_HeadNode[i]->m_ID){
+                Node* Head = m_HeadNode[i];
+                while(NULL != Head->m_next){
+                    Head = Head->m_next;
+                }
+                Head->m_next = new Node();
+                Head->m_next->m_ID = _dID;
+                Head->m_next->m_next = NULL;
+                Head->m_next->m_weight = _weight;
+                m_TotalEdgeCnt++;
+                break;
+            }
+        }
+    }
+
+    //delete Node
+    void mDeleteNode(char _ID){
+        f(i,0,m_TotalNodeCnt)
+            mDeleteEdge(_ID, m_HeadNode[i]->m_ID);
+
+        f(i,0,m_TotalNodeCnt){
+            if(_ID == m_HeadNode[i]->m_ID){
+                m_HeadNode[i] = NULL;
+                f(j,i,m_TotalNodeCnt){
+                    m_HeadNode[j] = m_HeadNode[(j-i)+(i+1)];
+                }
+                m_TotalNodeCnt--;
+                break;
+            }
+        }
+    }
+    
+    //delete Edge
+    void mDeleteEdge(char _pID, char _dID){
+        f(i,0,m_TotalNodeCnt){
+            Node* head = m_HeadNode[i];
+            if(_pID == head->m_ID){
+                while(NULL != head->m_next){
+                    if(_dID == head->m_next->m_ID){
+                        Node* temp = head->m_next->m_next;
+                        head->m_next = temp;
+                        m_TotalEdgeCnt--;
+                        return;
+                    }
+                    else{
+                        head = head->m_next;
+                    }
+                }
+            }
+        }        
+    }
+
+    //Display
+    void mDisplay(void){
+        cout << "Total Node Count : " << m_TotalNodeCnt << endl;
+        cout << "Total Edge Count : " << m_TotalEdgeCnt << endl;
+
+        f(i,0,m_TotalNodeCnt){
+            if(NULL == m_HeadNode[i])   continue;
+            
+            cout << m_HeadNode[i]->m_ID;
+            Node* head = m_HeadNode[i];
+            while(NULL != (head->m_next)){
+                cout << "->" << head->m_next->m_ID << "(" << head->m_next->m_weight << ")"; 
+                head = head->m_next;
+            }
+            cout << endl;
+        }
+    }
+};
+
+
+int graph_adjacency_list(void)
+{
+    AdjList graph;
+
+    graph.mInsertNode('A');
+    graph.mInsertNode('B');
+    graph.mInsertNode('C');
+    graph.mInsertNode('D');
+    graph.mInsertNode('E');
+    graph.mInsertNode('F');
+    graph.mDisplay();
+    H_LINE
+
+    graph.mInsertEdge('A','B',4);
+    graph.mInsertEdge('B','C',3);
+    graph.mInsertEdge('B','D',2);
+    graph.mInsertEdge('C','E',7);
+    graph.mInsertEdge('D','E',9);
+    graph.mInsertEdge('E','F',5);
+    graph.mDisplay();
+    H_LINE
+
+    graph.mDeleteEdge('B','D');
+    graph.mDisplay();
+    H_LINE
+
+    graph.mDeleteNode('D');
+    graph.mDisplay();
+    H_LINE
+
+    return 0;
+}
+#endif
+
+
+
+#ifdef VER_2
+
+#include <vector>
+using namespace std;
+
+/**
+ * 아래를 구현해 보자
+ * A→(4)→B→(3)→C→(7)→E→(5)→F
+ *        ↘︎︎        ↗️  ️
+ *         (2)   (9)
+ *            ↘ ↗️
+ *             D︎ ︎
+ */
+
+
+int graph_adjacency_list(void)
+{
+    return 0;
+}
+#endif
