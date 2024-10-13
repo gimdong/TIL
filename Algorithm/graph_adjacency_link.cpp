@@ -16,8 +16,8 @@
 #define H_LINE          f(i, 0, 10) printf("-"); printf("\n");
 
 //#define VER_1 // Linked List 로 양방향 그래프 구현
-#define VER_1_2 // Linked List 로 방향+가중치 그래프 구현
-//#define VER_2 // vector 로 방향+가중치 그래프 구현
+//#define VER_1_2 // Linked List 로 방향+가중치 그래프 구현
+#define VER_2 // vector 로 방향+가중치 그래프 구현
 
 #ifdef VER_1
 typedef struct Node{
@@ -264,8 +264,6 @@ int graph_adjacency_list(void)
 }
 #endif
 
-
-
 #ifdef VER_2
 
 #include <vector>
@@ -281,8 +279,75 @@ using namespace std;
  */
 
 
+class AdjList
+{
+private :
+
+    vector<char,int> map[MAX_N];
+
+public :
+    AdjList(){
+        f(i,0,MAX_N)    map[i].clear();
+    }
+
+    //InsertNode
+    void mInsertNode(char _ID){
+
+    }
+    //InsertEdge
+    void mInsertEdge(char _pID, char _dID, int _weight){
+
+    }
+    //DeleteNode
+    void mDeleteNode(char _ID){
+
+    }
+    //DeleteEdge
+    void mDeleteEdge(char _pID, char _dID){
+
+    }
+    //Display
+    void mDisplay(void){
+        
+    }
+
+};
+
+
+
 int graph_adjacency_list(void)
 {
+    AdjList graph;
+
+    graph.mInsertNode('A');
+    graph.mInsertNode('B');
+    graph.mInsertNode('C');
+    graph.mInsertNode('D');
+    graph.mInsertNode('E');
+    graph.mInsertNode('F');
+    graph.mDisplay();
+    H_LINE
+
+    graph.mInsertEdge('A','B',4);
+    graph.mInsertEdge('B','C',3);
+    graph.mInsertEdge('B','D',2);
+    graph.mInsertEdge('C','E',7);
+    graph.mInsertEdge('D','E',9);
+    graph.mInsertEdge('E','F',5);
+    graph.mDisplay();
+    H_LINE
+
+    graph.mDeleteEdge('B','D');
+    graph.mDisplay();
+    H_LINE
+
+    graph.mDeleteNode('D');
+    graph.mDisplay();
+    H_LINE
+
+
+
+
     return 0;
 }
 #endif
