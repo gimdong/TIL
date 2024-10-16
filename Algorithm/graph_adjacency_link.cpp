@@ -283,24 +283,50 @@ class AdjList
 {
 private :
 
-    vector<char,int> map[MAX_N];
+    int _nNode_count;
+    char _cNode[MAX_N];
+    vector<pair<char,int>> _vMap[MAX_N]; // char : _name, int : _weight
 
 public :
     AdjList(){
-        f(i,0,MAX_N)    map[i].clear();
+        _nNode_count = 0;
+        f(i,0,MAX_N){
+            _cNode[i] = '\0';
+            _vMap[i].clear();
+        }
     }
 
     //InsertNode
     void mInsertNode(char _ID){
-
+        _cNode[_nNode_count++] = _ID;
     }
     //InsertEdge
     void mInsertEdge(char _pID, char _dID, int _weight){
-
+        f(i,0,_nNode_count){
+            if(_cNode[i] == _pID){
+                //_vMap[i].push_back(make_pair(_dID,_weight));
+                _vMap[i].push_back({_dID,_weight});
+            }
+        }
     }
     //DeleteNode
     void mDeleteNode(char _ID){
 
+        f(i,0,_nNode_count){
+            for(auto iter = _vMap[i].begin(); iter != _vMap[i].end(); ++iter){
+                if(iter->first == _ID){ // 여기서 Error : BAD_ACCESS // iter가 ???? 으로 확인됨. Todo...
+                    _vMap[i].erase(iter);
+                }
+            }
+        }
+
+        f(i,0,_nNode_count){
+            if(_cNode[i] == _ID){
+                _cNode[i] = '\0';
+                _nNode_count--;
+                return;
+            }
+        }
     }
     //DeleteEdge
     void mDeleteEdge(char _pID, char _dID){
@@ -308,7 +334,17 @@ public :
     }
     //Display
     void mDisplay(void){
-        
+        cout << "Total Node Count : " << _nNode_count << endl;
+
+        f(i,0,_nNode_count){
+            if('\0' == _cNode[i])   continue;
+            
+            cout << _cNode[i];
+            for(auto iter=_vMap[i].begin(); iter != _vMap[i].end(); ++iter){
+                cout << "->" << iter->first << "(" << iter->second << ")"; 
+            }
+            cout << endl;
+        }      
     }
 
 };
