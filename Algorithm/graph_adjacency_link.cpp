@@ -311,18 +311,29 @@ public :
     }
     //DeleteNode
     void mDeleteNode(char _ID){
-
         f(i,0,_nNode_count){
             for(auto iter = _vMap[i].begin(); iter != _vMap[i].end(); ++iter){
                 if(iter->first == _ID){ // 여기서 Error : BAD_ACCESS // iter가 ???? 으로 확인됨. Todo...
                     _vMap[i].erase(iter);
+                    break; 
+                    // Error의 원인은 지워야 되는 부분이 마지막에 있을 경우 iter가 for문의 조건문에서 end를 넘어간 상태가 되므로 무한 Loop에 빠지게 된다.
+                    // 그러므로 vertor의 erase는 주의 해야 한다.
                 }
             }
         }
-
         f(i,0,_nNode_count){
             if(_cNode[i] == _ID){
-                _cNode[i] = '\0';
+                f(j,i,_nNode_count){
+
+                    if(j+1 != _nNode_count){
+                        _cNode[j] = _cNode[j+1];
+                        _vMap[j] = _vMap[j+1];
+                    }
+                    else{
+                        _cNode[j] = '\0';
+                        _vMap[j].clear();
+                    }
+                }
                 _nNode_count--;
                 return;
             }
@@ -330,15 +341,22 @@ public :
     }
     //DeleteEdge
     void mDeleteEdge(char _pID, char _dID){
-
+        f(i,0,_nNode_count){
+            if(_cNode[i] == _pID){
+                for(auto iter = _vMap[i].begin(); iter != _vMap[i].end(); ++iter){
+                    if(iter->first == _dID){
+                        _vMap[i].erase(iter);
+                        return;
+                    }
+                }
+            }
+        }
     }
     //Display
     void mDisplay(void){
         cout << "Total Node Count : " << _nNode_count << endl;
 
         f(i,0,_nNode_count){
-            if('\0' == _cNode[i])   continue;
-            
             cout << _cNode[i];
             for(auto iter=_vMap[i].begin(); iter != _vMap[i].end(); ++iter){
                 cout << "->" << iter->first << "(" << iter->second << ")"; 
