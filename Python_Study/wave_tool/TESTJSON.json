@@ -1,0 +1,12 @@
+{
+  "signals": [
+    { "name": "clk", "type": "clock", "cycles": 12 },
+    { "name": "CLE", "type": "level", "levels": [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { "name": "ALE", "type": "level", "levels": [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { "name": "WE#", "type": "level", "levels": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1] },
+    { "name": "RE#", "type": "level", "levels": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+    { "name": "CE#", "type": "level", "levels": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+    { "name": "IO", "type": "data", "values": ["80", "00", "01", "AA", "BB", "CC", "DD", "FF", "--", "--", "--", "--"] },
+    { "name": "R/B#", "type": "level", "levels": [1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1] }
+  ]
+}

@@ -1,0 +1,45 @@
+$date today $end
+$version NAND Analyzer $end
+$timescale 1ns $end
+$var wire 1 ! CE# $end
+$var wire 1 " CLE $end
+$var wire 1 # ALE $end
+$var wire 1 $ WE# $end
+$var wire 1 % RE# $end
+$var wire 1 & R/B# $end
+$enddefinitions $end
+$dumpvars
+#0
+0!
+1"
+0#
+0$
+1%
+1&
+#1
+1$
+#2
+0$
+#3
+1$
+#4
+0"
+0$
+#5
+1#
+1$
+0&
+#6
+0$
+#7
+1$
+1&
+#8
+0$
+#9
+0#
+1$
+#10
+0$
+#11
+1$
