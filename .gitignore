@@ -21,3 +21,4 @@ Algorithm/Main
 .vscode/Build/graph_adjacency_link.dSYM/Contents/Info.plist
 .vscode/Build/graph_adjacency_link.dSYM/Contents/Resources/DWARF/graph_adjacency_link
 .vscode/Build/graph_adjacency_link.dSYM/Contents/Resources/Relocations/aarch64/graph_adjacency_link.yml
+.vscode/.venv_py310/*
