@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import (
     QHBoxLayout, QFileDialog, QGraphicsScene, QGraphicsView, QGraphicsTextItem,
     QTableWidget, QTableWidgetItem, QInputDialog, QLabel
 )
-from PyQt5.QtGui import QFont, QColor
+from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 
 
@@ -99,7 +99,7 @@ class WaveToolGUI(QMainWindow):
         self.setGeometry(100, 100, 800, 600)
 
         self.scene = QGraphicsScene()
-        self.view = ZoomableGraphicsView(self.scene)  # 변경: ZoomableGraphicsView 사용
+        self.view = QGraphicsView(self.scene)
 
         self.load_button = QPushButton("Load JSON")
         self.draw_button = QPushButton("Draw Waveform")
@@ -140,61 +140,35 @@ class WaveToolGUI(QMainWindow):
 
     def plot_waveform(self):
         self.scene.clear()
-        self.scene.setBackgroundBrush(Qt.white)
         if not self.signals_dict:
             return
 
         signal_names = list(self.signals_dict.keys())
         num_timesteps = max(len(v) for v in self.signals_dict.values())
 
-        x_scale = 30  # 시간축 간격
-        y_spacing = 40  # 신호 간 간격
-        high = 0       # high 위치 (위쪽)
-        low = 20       # low 위치 (아래쪽)
-        label_offset = 60  # 신호 이름 왼쪽 여백
+        x_scale = 20
+        y_spacing = 30
+        high = 10
+        low = 20
 
         for i, name in enumerate(signal_names):
             values = self.signals_dict[name]
-            y_base = i * y_spacing + 20  # 위쪽 여백
-            # 신호 이름
-            label = QGraphicsTextItem(name)
-            label.setFont(QFont("Arial", 12))
-            label.setDefaultTextColor(QColor(0, 102, 204))  # 파란색 계열
-            label.setPos(0, y_base + (low + high) // 2 - 10)
-            self.scene.addItem(label)
-
-            # 파형 그리기
-            prev_val = values[0]
-            prev_x = label_offset
-            prev_y = y_base + (high if prev_val else low)
+            y_base = i * y_spacing
+            prev = values[0]
             for t in range(len(values)):
-                x = label_offset + t * x_scale
+                x = t * x_scale
                 y = y_base + (high if values[t] else low)
-                # 값이 바뀌면 수직선
-                if t > 0 and values[t] != prev_val:
-                    self.scene.addLine(prev_x, prev_y, prev_x, y, )
-                # 수평선
                 if t > 0:
-                    self.scene.addLine(prev_x, y, x, y)
-                prev_x = x
-                prev_y = y
-                prev_val = values[t]
-            # 마지막 수평선
-            self.scene.addLine(prev_x, prev_y, label_offset + len(values) * x_scale, prev_y)
-# QGraphicsView를 상속받아 확대/축소 기능 추가
-class ZoomableGraphicsView(QGraphicsView):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._zoom = 0
-
-    def wheelEvent(self, event):
-        if event.angleDelta().y() > 0:
-            factor = 1.25
-            self._zoom += 1
-        else:
-            factor = 0.8
-            self._zoom -= 1
-        self.scale(factor, factor)
+                    prev_y = y_base + (high if prev else low)
+                    self.scene.addLine(x - x_scale, prev_y, x, y)
+                prev = values[t]
+                if t < len(values) - 1:
+                    next_x = (t + 1) * x_scale
+                    self.scene.addLine(x, y, next_x, y)
+            label = QGraphicsTextItem(name)
+            label.setFont(QFont("Arial", 10))
+            label.setPos(0, y_base - 10)
+            self.scene.addItem(label)
 
 
 if __name__ == "__main__":

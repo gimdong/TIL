@@ -1,5 +1,8 @@
 index,time,CMD,OPT_1,OPT_2,OPT_3,OPT_4,OPT_5,OPT_6,OPT_7,OPT_8,TOP_9,CH,BANK,DESCRIPTION
-1,100,CMD(00),ADD(00),ADD(01),ADD(02), , , , , , ,0 ,0,ERASE
-2,200,CMD(01),ADD(00),ADD(01),ADD(02), , , , , , ,0 ,0,ERASE
-3,300,CMD(02),ADD(00),ADD(01),ADD(02), , , , , , ,0 ,0,ERASE
-4,400,CMD(03),ADD(00),ADD(01),ADD(02), , , , , , ,0 ,0,ERASE
+1,100,CMD(70),DATA(80),,,,,,,,,0,0,Read Status
+2,200,CMD(00),ADD(00),ADD(01),ADD(02),,,,,,,0,0,ERASE
+3,300,CMD(70),DATA(80),,,,,,,,,0,0,Read Status
+4,400,CMD(DA),,,,,,,,,,0,0,SLC Enable
+5,600,CMD(70),DATA(81),,,,,,,,,0,0,Read Status
+6,700,CMD(80),ADD(00),ADD(01),ADD(02),ADD(03),ADD(04),ADD(05),CMD(10),,,0,0,PROGRAM
+7,900,CMD(DF),,,,,,,,,,0,0,SLC Abort
