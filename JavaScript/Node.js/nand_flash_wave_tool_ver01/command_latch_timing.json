@@ -1,0 +1,49 @@
+{
+    "name": "Command Latch Timing",
+    "description": "Timing diagram for the command latch phase of NAND flash memory operations.",
+    "timing_parameters": {
+    "tCLS": "Clock Low to Command Latch Start",
+    "tCLH": "Clock High to Command Latch Hold",
+    "tCS":  "Chip Select to Command Start",
+    "tCH":  "Chip Select Hold",
+    "tWP":  "Write Pulse Width",
+    "tALS": "Address Latch Start",
+    "tALH": "Address Latch Hold",
+    "tDS":  "Data Setup Time",
+    "tDH":  "Data Hold Time",
+    "tWB": "Write Busy Time"
+    },
+    "reference":{
+        "pin": "WE_n",
+        "timing": "tWP",
+        "time": 0
+    },
+    "timeline":{
+        "units": "ns",
+        "start": "min(tCLS, tCS, tALS, tDS)",
+        "end": "max(tCLH, tCH, tALH, tDH, tWB)"
+    },
+    "pin_parameters": {
+        "CLE": [
+            {"level": "H", "time": "-tCLS"},
+            {"level": "L", "time": "tCLH"}
+        ],
+        "CE_n": [
+            {"level": "L", "time": "-tCS"},
+            {"level": "H", "time": "tCH"}
+        ],
+        "WE_n": [
+            {"level": "L", "time": "-tWP"},
+            {"level": "H", "time": "tWP"}
+        ],
+        "ALE": [
+            {"level": "H", "time": "-tALS"},
+            {"level": "L", "time": "tALH"}
+        ],
+        "IO[0:7]": [
+            {"level": "", "time": "-tDS"},
+            {"level": "L", "time": "tDH"}
+        ],
+        "R/B_n": []
+    }
+}

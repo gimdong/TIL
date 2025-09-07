@@ -1,0 +1,71 @@
+[
+    {
+        "index": 1,
+        "time": 100,
+        "CMD": "CMD(70)",
+        "OPT_1": "DATA(80)",
+        "CH": 0,
+        "BANK": 0,
+        "DESCRIPTION": "Read Status"
+    },
+    {
+        "index": 2,
+        "time": 200,
+        "CMD": "CMD(00)",
+        "OPT_1": "ADD(00)",
+        "OPT_2": "ADD(01)",
+        "OPT_3": "ADD(02)",
+        "CH": 0,
+        "BANK": 0,
+        "DESCRIPTION": "ERASE"
+    },
+    {
+        "index": 3,
+        "time": 300,
+        "CMD": "CMD(70)",
+        "OPT_1": "DATA(80)",
+        "CH": 0,
+        "BANK": 0,
+        "DESCRIPTION": "Read Status"
+    },
+    {
+        "index": 4,
+        "time": 400,
+        "CMD": "CMD(DA)",
+        "CH": 0,
+        "BANK": 0,
+        "DESCRIPTION": "SLC Enable"
+    },
+    {
+        "index": 5,
+        "time": 600,
+        "CMD": "CMD(70)",
+        "OPT_1": "DATA(81)",
+        "CH": 0,
+        "BANK": 0,
+        "DESCRIPTION": "Read Status"
+    },
+    {
+        "index": 6,
+        "time": 700,
+        "CMD": "CMD(80)",
+        "OPT_1": "ADD(00)",
+        "OPT_2": "ADD(01)",
+        "OPT_3": "ADD(02)",
+        "OPT_4": "ADD(03)",
+        "OPT_5": "ADD(04)",
+        "OPT_6": "ADD(05)",
+        "OPT_7": "CMD(10)",
+        "CH": 0,
+        "BANK": 0,
+        "DESCRIPTION": "PROGRAM"
+    },
+    {
+        "index": 7,
+        "time": 900,
+        "CMD": "CMD(DF)",
+        "CH": 0,
+        "BANK": 0,
+        "DESCRIPTION": "SLC Abort"
+    }
+]

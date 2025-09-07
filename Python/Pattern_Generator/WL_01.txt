@@ -1,0 +1,27 @@
+*-1 : Read Status ------------* 
+NOP CMD TP<#70 TS15
+NOP DATA TP<#80 TS15
+*-2 : ERASE ------------------* 
+NOP CMD TP<#00 TS15
+NOP ADD TP<#00 TS15
+NOP ADD TP<#01 TS15
+NOP ADD TP<#02 TS15
+*-3 : Read Status ------------* 
+NOP CMD TP<#70 TS15
+NOP DATA TP<#80 TS15
+*-4 : SLC Enable -------------* 
+NOP CMD TP<#DA TS15
+*-5 : Read Status ------------* 
+NOP CMD TP<#70 TS15
+NOP DATA TP<#81 TS15
+*-6 : PROGRAM ----------------* 
+NOP CMD TP<#80 TS15
+NOP ADD TP<#00 TS15
+NOP ADD TP<#01 TS15
+NOP ADD TP<#02 TS15
+NOP ADD TP<#03 TS15
+NOP ADD TP<#04 TS15
+NOP ADD TP<#05 TS15
+NOP CMD TP<#10 TS15
+*-7 : SLC Abort --------------* 
+NOP CMD TP<#DF TS15

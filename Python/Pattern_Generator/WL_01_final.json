@@ -1,0 +1,101 @@
+[
+    {
+        "index": 1,
+        "DESCRIPTION": "Read Status",
+        "CMD": "70",
+        "OPT": [
+            {
+                "TYPE": "DATA",
+                "VALUE": "80"
+            }
+        ]
+    },
+    {
+        "index": 2,
+        "DESCRIPTION": "ERASE",
+        "CMD": "00",
+        "OPT": [
+            {
+                "TYPE": "ADD",
+                "VALUE": "00"
+            },
+            {
+                "TYPE": "ADD",
+                "VALUE": "01"
+            },
+            {
+                "TYPE": "ADD",
+                "VALUE": "02"
+            }
+        ]
+    },
+    {
+        "index": 3,
+        "DESCRIPTION": "Read Status",
+        "CMD": "70",
+        "OPT": [
+            {
+                "TYPE": "DATA",
+                "VALUE": "80"
+            }
+        ]
+    },
+    {
+        "index": 4,
+        "DESCRIPTION": "SLC Enable",
+        "CMD": "DA",
+        "OPT": []
+    },
+    {
+        "index": 5,
+        "DESCRIPTION": "Read Status",
+        "CMD": "70",
+        "OPT": [
+            {
+                "TYPE": "DATA",
+                "VALUE": "81"
+            }
+        ]
+    },
+    {
+        "index": 6,
+        "DESCRIPTION": "PROGRAM",
+        "CMD": "80",
+        "OPT": [
+            {
+                "TYPE": "ADD",
+                "VALUE": "00"
+            },
+            {
+                "TYPE": "ADD",
+                "VALUE": "01"
+            },
+            {
+                "TYPE": "ADD",
+                "VALUE": "02"
+            },
+            {
+                "TYPE": "ADD",
+                "VALUE": "03"
+            },
+            {
+                "TYPE": "ADD",
+                "VALUE": "04"
+            },
+            {
+                "TYPE": "ADD",
+                "VALUE": "05"
+            },
+            {
+                "TYPE": "CMD",
+                "VALUE": "10"
+            }
+        ]
+    },
+    {
+        "index": 7,
+        "DESCRIPTION": "SLC Abort",
+        "CMD": "DF",
+        "OPT": []
+    }
+]

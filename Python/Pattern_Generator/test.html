@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NAND Timing Viewer</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .signal-line { stroke: black; stroke-width: 2; fill: none; }
+    .bus-box { stroke: black; stroke-width: 1; opacity: 0.9; }
+    .label { font-size: 10px; text-anchor: middle; }
+    .axis { font-size: 10px; }
+    .guide-line { stroke: gray; stroke-width: 1; stroke-dasharray: 4; }
+  </style>
+</head>
+<body>
+<h3>NAND Timing Viewer</h3>
+<input type="file" id="fileInput" accept="application/json" />
+<svg id="chart"></svg>
+
+<script>
+const svg = d3.select("#chart");
+const width = 1200;
+const heightBase = 300;
+const margin = { top: 40, right: 20, bottom: 40, left: 60 };
+const boxHeight = 30;
+const signalGap = 60;
+const signalBaseY = 100;
+const colorMap = { CMD: "#1f77b4", DATA: "#ff7f0e", ADD: "#2ca02c" };
+
+function clearChart() {
+  svg.html(""); // 더 빠른 전체 삭제
+}
+
+function drawSignals(signalData) {
+  const signalNames = Object.keys(signalData);
+  const chartHeight = signalBaseY + signalNames.length * signalGap + 80;
+  svg.attr("width", width).attr("height", chartHeight);
+
+  const timeScale = d3.scaleLinear().domain([0, 100]).range([margin.left, width - margin.right]);
+
+  // 신호 라인과 레이블을 그룹으로 묶어서 추가
+  const signalGroup = svg.append("g").attr("class", "signals");
+  signalNames.forEach((name, idx) => {
+    const yBase = signalBaseY + idx * signalGap;
+    const points = signalData[name];
+
+    let pathData = "";
+    for (let i = 0; i < points.length - 1; i++) {
+      const [x1, v1] = points[i];
+      const [x2, v2] = points[i + 1];
+      const px1 = timeScale(x1);
+      const px2 = timeScale(x2);
+      const py1 = yBase - v1 * 20;
+      const py2 = yBase - v2 * 20;
+      pathData += `M${px1},${py1} `;
+      pathData += v1 !== v2 ? `V${py2} H${px2} ` : `H${px2} `;
+    }
+
+    signalGroup.append("path")
+      .attr("d", pathData)
+      .attr("class", "signal-line");
+    signalGroup.append("text")
+      .attr("x", margin.left - 10)
+      .attr("y", yBase - 10)
+      .attr("text-anchor", "end")
+      .attr("class", "axis")
+      .text(name);
+  });
+
+  drawBusBoxes(window.currentJson.buses, timeScale, chartHeight);
+  drawTopLabels(window.currentJson.topLabels, timeScale);
+  drawTimeTicks(10, timeScale, chartHeight);
+}
+
+function drawBusBoxes(buses, timeScale, chartHeight) {
+  if (!buses) return;
+  const y = signalBaseY - 80;
+  const group = svg.append("g").attr("class", "bus-boxes");
+  buses.forEach(d => {
+    const x = timeScale(d.start);
+    const w = timeScale(d.end) - x;
+    group.append("rect")
+      .attr("x", x)
+      .attr("y", y)
+      .attr("width", w)
+      .attr("height", boxHeight)
+      .attr("fill", colorMap[d.type])
+      .attr("class", "bus-box");
+    group.append("text")
+      .attr("x", x + w / 2)
+      .attr("y", y + boxHeight / 2 + 3)
+      .attr("class", "label")
+      .text(d.label);
+    group.append("line")
+      .attr("x1", x)
+      .attr("y1", 0)
+      .attr("x2", x)
+      .attr("y2", chartHeight)
+      .attr("class", "guide-line");
+  });
+}
+
+function drawTopLabels(topLabels, timeScale) {
+  if (!topLabels) return;
+  const group = svg.append("g").attr("class", "top-labels");
+  topLabels.forEach(d => {
+    const x = timeScale(d.start);
+    const w = timeScale(d.end) - x;
+    group.append("rect")
+      .attr("x", x)
+      .attr("y", 0) // 기존 10에서 0으로 변경
+      .attr("width", w)
+      .attr("height", 20)
+      .attr("fill", "#dddddd")
+      .attr("stroke", "black");
+    group.append("text")
+      .attr("x", x + w / 2)
+      .attr("y", 15) // 기존 25에서 15로 변경
+      .attr("class", "label")
+      .text(d.label);
+  });
+}
+
+function drawTimeTicks(step, timeScale, chartHeight) {
+  const group = svg.append("g").attr("class", "time-ticks");
+  for (let t = 0; t <= 100; t += step) {
+    const x = timeScale(t);
+    group.append("line")
+      .attr("x1", x)
+      .attr("y1", chartHeight - 20)
+      .attr("x2", x)
+      .attr("y2", chartHeight)
+      .attr("stroke", "gray");
+    group.append("text")
+      .attr("x", x + 12)
+      .attr("y", chartHeight - 5)
+      .attr("text-anchor", "start")
+      .attr("class", "axis")
+      .text(`${t}ns`);
+  }
+}
+
+function renderFromJSON(json) {
+  window.currentJson = json;
+  clearChart();
+  drawSignals(json.signals);
+}
+
+document.getElementById("fileInput").addEventListener("change", function(evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const json = JSON.parse(e.target.result);
+      renderFromJSON(json);
+    } catch (err) {
+      alert("Invalid JSON file.");
+    }
+  };
+  reader.readAsText(file);
+});
+</script>
+</body>
+</html>

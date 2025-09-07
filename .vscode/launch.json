@@ -18,8 +18,13 @@
             "externalConsole": true, // 외부 터미널에서 결과를 확인한다.
             "MIMode": "lldb", 
             "preLaunchTask": "C/C++: clang++ 활성 파일 빌드"
+        },
+        {
+            "name": "Python 디버거: 3.10.13",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
         }
-
-
     ]
 }
